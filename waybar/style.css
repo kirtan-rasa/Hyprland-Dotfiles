@@ -6,12 +6,27 @@
 }
 
 window#waybar {
-    background-color: rgba(43, 48, 59, 0.5);
+    background-color: rgba(43, 48, 59, 1);
     color: #ffffff;
     transition-property: background-color;
     transition-duration: 0.5s;
+    border: 3px solid #140987;
 }
 
+.modules-left,
+.modules-right,
+.modules-center {
+    margin-top: 6px;
+    margin-bottom: 6px;
+}
+
+.modules-left {
+    margin-left: 6px;
+}
+
+.modules-right {
+    margin-right: 6px;
+}
 window#waybar.hidden {
     opacity: 0.2;
 }
@@ -229,7 +244,7 @@ label:focus {
 }
 
 #temperature {
-    background-color: #f0932b;
+    background-color: #5849fc;
 }
 
 #temperature.critical {
@@ -278,9 +293,9 @@ label:focus {
 #language {
     background: #00b093;
     color: #740864;
-    padding: 0 5px;
-    margin: 0 5px;
-    min-width: 16px;
+    padding: 0 3px;
+    margin: 0 3px;
+    min-width: 20px;
 }
 
 #keyboard-state {

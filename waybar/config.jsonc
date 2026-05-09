@@ -2,37 +2,40 @@
 {
   // "layer": "top", // Waybar at top layer
   "position": "top", // Waybar position (top|bottom|left|right)
-  "height": 32, // Waybar height (to be removed for auto height)
-  "width": 1580, // Waybar width
+  "height": 42, // Waybar height (to be removed for auto height)
+  "width": 1570, // Waybar width
   "spacing": 6, // Gaps between modules
-  "margin": "8 8 0 0",
+  "margin": "10 10 0 0",
+
   // Choose the order of the modules
   "modules-left": [
-    "hyprland/workspaces",
-    "hyprland/mode",
-    "hyprland/scratchpad",
+    //"hyprland/mode",
+    //"hyprland/scratchpad",
     "custom/media",
-    "custom/cava_mviz",
-  ],
-  //"modules-center": ["hyprland/window"],
-  "modules-right": [
+    "network",
+    "pulseaudio",
+    "power-profiles-daemon",
+    "clock",
     "mpd",
     "idle_inhibitor",
-    "pulseaudio",
-    "network",
-    "power-profiles-daemon",
+  ],
+
+  "modules-center": ["hyprland/workspaces"],
+
+  "modules-right": [
+    "custom/cava_mviz",
     "cpu",
     "memory",
-    //"temperature",
+    "temperature",
     //"backlight",
     //"keyboard-state",
-    //"sway/language",
+    "hyprland/language",
     "battery",
     //"battery#bat2",
-    "clock",
     //"tray",
     "custom/power",
   ],
+
   // Modules configuration
   "hyprland/workspaces": {
     "disable-scroll": true,
@@ -130,10 +133,10 @@
     "format": "{}% ",
   },
   "temperature": {
-    // "thermal-zone": 2,
-    // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
+    "thermal-zone": 2,
+    "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
     "critical-threshold": 80,
-    // "format-critical": "{temperatureC}°C {icon}",
+    "format-critical": "{temperatureC}°C {icon}",
     "format": "{temperatureC}°C {icon}",
     "format-icons": ["", "", ""],
   },
