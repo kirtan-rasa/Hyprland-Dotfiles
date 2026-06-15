@@ -1,7 +1,7 @@
 * {
     font-family:
         "Font Awesome 6 Free Solid", "Font Awesome 6 Free",
-        "Font Awesome 6 Brands", "Symbols Nerd Font Mono", "Roboto", sans-serif;
+        "Font Awesome 6 Brands", "Symbols Nerd Font Mono";
     font-size: 13px;
 }
 
@@ -31,14 +31,12 @@ window#waybar.hidden {
     opacity: 0.2;
 }
 
-/*
 window#waybar.empty {
     background-color: transparent;
 }
 window#waybar.solo {
-    background-color: #FFFFFF;
+    background-color: #ffffff;
 }
-*/
 
 window#waybar.termite {
     background-color: #3f3f3f;

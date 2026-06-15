@@ -2,7 +2,7 @@
 {
   // "layer": "top", // Waybar at top layer
   "position": "top", // Waybar position (top|bottom|left|right)
-  "height": 42, // Waybar height (to be removed for auto height)
+  "height": 45, // Waybar height (to be removed for auto height)
   "width": 1570, // Waybar width
   "spacing": 6, // Gaps between modules
   "margin": "10 10 0 0",
@@ -16,7 +16,6 @@
     "pulseaudio",
     "power-profiles-daemon",
     "clock",
-    "mpd",
     "idle_inhibitor",
   ],
 
@@ -26,7 +25,6 @@
     "custom/cava_mviz",
     "cpu",
     "memory",
-    "temperature",
     //"backlight",
     //"keyboard-state",
     "hyprland/language",
