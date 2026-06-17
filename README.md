@@ -34,6 +34,7 @@ This is my personal Hyprland configuration — **light, simple, and constantly i
 ---
 
 ### Installation
+#### Tip
 ```bash
 git clone https://github.com/kirtan-rasa/Hyprland-Dotfiles.git
 cd Hyprland-Dotfiles
