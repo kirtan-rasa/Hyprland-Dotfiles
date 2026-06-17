@@ -16,7 +16,7 @@
 
 This is my personal Hyprland configuration — **light, simple, and constantly improving**. 
 
-**Work in progress!** I'm going to make them really better in 2026. Stay tuned and [follow me on GitHub](https://github.com/kirtan-rasa) for updates.
+**Work in progress!** I'm going to make this really better in 2026. Stay tuned and [follow me on GitHub](https://github.com/kirtan-rasa) for updates.
 
 ---
 
@@ -30,14 +30,6 @@ This is my personal Hyprland configuration — **light, simple, and constantly i
 | **Cava** | Audio visualizer |
 | **Hyprlock** | Lock screen |
 | **Hypridle** | Idle management |
+| **Dunst** | Notification service |
 
 ---
-
-### 🚀 Installation
-
-> **Tip:** Backup your old configs first if you have any.
-
-```bash
-git clone https://github.com/kirtan-rasa/Hyprland-Dotfiles.git
-cd Hyprland-Dotfiles
-cp -r * ~/.config/
