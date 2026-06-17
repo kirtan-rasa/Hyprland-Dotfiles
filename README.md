@@ -26,10 +26,16 @@ This is my personal Hyprland configuration — **light, simple, and constantly i
 |-----------|---------|
 | **Waybar** | Status bar |
 | **Rofi** | App launcher |
-| **Pfetch** | System info |
 | **Cava** | Audio visualizer |
 | **Hyprlock** | Lock screen |
 | **Hypridle** | Idle management |
-| **Dunst** | Notification service |
+| **Dunst** | Notification deamon |
 
 ---
+
+### Installation
+```bash
+git clone https://github.com/kirtan-rasa/Hyprland-Dotfiles.git
+cd Hyprland-Dotfiles
+chmod +x install.sh
+./install.sh
