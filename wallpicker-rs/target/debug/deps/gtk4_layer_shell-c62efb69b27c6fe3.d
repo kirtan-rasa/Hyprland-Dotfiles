@@ -1,0 +1,9 @@
+/home/kirtan-rasa/wallpicker-rs/target/debug/deps/gtk4_layer_shell-c62efb69b27c6fe3.d: /home/kirtan-rasa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/gtk4-layer-shell-0.7.1/src/lib.rs /home/kirtan-rasa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/gtk4-layer-shell-0.7.1/src/auto/mod.rs /home/kirtan-rasa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/gtk4-layer-shell-0.7.1/src/auto/enums.rs /home/kirtan-rasa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/gtk4-layer-shell-0.7.1/src/auto/functions.rs /home/kirtan-rasa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/gtk4-layer-shell-0.7.1/src/manual.rs
+
+/home/kirtan-rasa/wallpicker-rs/target/debug/deps/libgtk4_layer_shell-c62efb69b27c6fe3.rmeta: /home/kirtan-rasa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/gtk4-layer-shell-0.7.1/src/lib.rs /home/kirtan-rasa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/gtk4-layer-shell-0.7.1/src/auto/mod.rs /home/kirtan-rasa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/gtk4-layer-shell-0.7.1/src/auto/enums.rs /home/kirtan-rasa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/gtk4-layer-shell-0.7.1/src/auto/functions.rs /home/kirtan-rasa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/gtk4-layer-shell-0.7.1/src/manual.rs
+
+/home/kirtan-rasa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/gtk4-layer-shell-0.7.1/src/lib.rs:
+/home/kirtan-rasa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/gtk4-layer-shell-0.7.1/src/auto/mod.rs:
+/home/kirtan-rasa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/gtk4-layer-shell-0.7.1/src/auto/enums.rs:
+/home/kirtan-rasa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/gtk4-layer-shell-0.7.1/src/auto/functions.rs:
+/home/kirtan-rasa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/gtk4-layer-shell-0.7.1/src/manual.rs:

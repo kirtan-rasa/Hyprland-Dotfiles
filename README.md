@@ -1,7 +1,7 @@
 <div align="center">
 
-![GitHub Repo stars](https://img.shields.io/github/stars/kirtan-rasa/Hyprland-Dotfiles?style=for-the-badge&color=cba6f7) 
-![GitHub last commit](https://img.shields.io/github/last-commit/kirtan-rasa/Hyprland-Dotfiles?style=for-the-badge&color=b4befe) 
+![GitHub Repo stars](https://img.shields.io/github/stars/kirtan-rasa/Hyprland-Dotfiles?style=for-the-badge&color=cba6f7)
+![GitHub last commit](https://img.shields.io/github/last-commit/kirtan-rasa/Hyprland-Dotfiles?style=for-the-badge&color=b4befe)
 ![GitHub repo size](https://img.shields.io/github/repo-size/kirtan-rasa/Hyprland-Dotfiles?style=for-the-badge&color=cba6f7)
 
 </div>
@@ -14,7 +14,7 @@
 
 ---
 
-This is my personal Hyprland configuration — **light, simple, and constantly improving**. 
+This is my personal Hyprland configuration — **light, simple, and constantly improving**.
 
 **Work in progress!** I'm going to make this really better in 2026. Stay tuned and [follow me on GitHub](https://github.com/kirtan-rasa) for updates.
 
@@ -26,17 +26,21 @@ This is my personal Hyprland configuration — **light, simple, and constantly i
 |-----------|---------|
 | **Waybar** | Status bar |
 | **Rofi** | App launcher |
+| **Kitty** | Terminal emulator |
 | **Cava** | Audio visualizer |
 | **Hyprlock** | Lock screen |
 | **Hypridle** | Idle management |
-| **Dunst** | Notification deamon |
+| **Dunst** | Notification daemon |
+| **Fastfetch** | System info fetch |
+| **wallpicker-rs** | Custom wallpaper picker (GTK4 + layer-shell, written in Rust) |
 
 ---
 
 ### Installation
-#### Tip
+
 ```bash
 git clone https://github.com/kirtan-rasa/Hyprland-Dotfiles.git
 cd Hyprland-Dotfiles
 chmod +x install.sh
 ./install.sh
+```

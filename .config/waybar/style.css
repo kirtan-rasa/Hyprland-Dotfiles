@@ -1,18 +1,53 @@
+/* ==========================================================================
+   Waybar — Catppuccin Mocha, полупрозрачный минимализм
+   ========================================================================== */
+
 * {
-    font-family:
-        "Font Awesome 6 Free Solid", "Font Awesome 6 Free",
-        "Font Awesome 6 Brands", "Symbols Nerd Font Mono";
+    font-family: "JetBrainsMono Nerd Font", sans-serif;
     font-size: 13px;
+    font-weight: 500;
+    min-height: 0;
 }
 
+/* ------------------------- Палитра Catppuccin Mocha ---------------------- */
+@define-color rosewater #f5e0dc;
+@define-color flamingo  #f2cdcd;
+@define-color pink      #f5c2e7;
+@define-color mauve     #cba6f7;
+@define-color red       #f38ba8;
+@define-color maroon    #eba0ac;
+@define-color peach     #fab387;
+@define-color yellow    #f9e2af;
+@define-color green     #a6e3a1;
+@define-color teal      #94e2d5;
+@define-color sky       #89dceb;
+@define-color sapphire  #74c7ec;
+@define-color blue      #89b4fa;
+@define-color lavender  #b4befe;
+
+@define-color text      #cdd6f4;
+@define-color subtext1  #bac2de;
+@define-color subtext0  #a6adc8;
+@define-color overlay0  #6c7086;
+
+@define-color base      rgba(30, 30, 46, 0.85); /* базовый фон бара — тёмный, хорошо читаемый */
+@define-color surface0  rgba(49, 50, 68, 0.75); /* лёгкая подложка для hover/active */
+@define-color surface1  rgba(69, 71, 90, 0.85);
+
+/* ------------------------------ Окно бара -------------------------------- */
 window#waybar {
-    background-color: rgba(43, 48, 59, 1);
-    color: #ffffff;
+    background: @base;
+    color: @text;
     transition-property: background-color;
-    transition-duration: 0.5s;
-    border: 3px solid #140987;
+    transition-duration: 0.4s;
+    border-radius: 16px;
 }
 
+window#waybar.hidden {
+    opacity: 0.2;
+}
+
+/* ------------------------------ Отступы ---------------------------------- */
 .modules-left,
 .modules-right,
 .modules-center {
@@ -21,76 +56,75 @@ window#waybar {
 }
 
 .modules-left {
-    margin-left: 6px;
+    margin-left: 10px;
 }
-
 .modules-right {
-    margin-right: 6px;
-}
-window#waybar.hidden {
-    opacity: 0.2;
+    margin-right: 10px;
 }
 
-window#waybar.empty {
-    background-color: transparent;
-}
-window#waybar.solo {
-    background-color: #ffffff;
+#window,
+#workspaces {
+    margin: 0 4px;
 }
 
-window#waybar.termite {
-    background-color: #3f3f3f;
+.modules-left > widget:first-child > #workspaces {
+    margin-left: 0;
+}
+.modules-right > widget:last-child > #workspaces {
+    margin-right: 0;
 }
 
-window#waybar.chromium {
-    background-color: #000000;
-    border: none;
-}
-
+/* --------------------------------- Кнопки --------------------------------- */
 button {
-    /* Use box-shadow instead of border so the text isn't offset */
-    box-shadow: inset 0 -3px transparent;
-    /* Avoid rounded borders under each button name */
+    box-shadow: none;
     border: none;
-    border-radius: 0;
+    border-radius: 12px;
+    transition: all 0.2s ease-in-out;
 }
 
-/* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
 button:hover {
-    background: inherit;
-    box-shadow: inset 0 -3px #ffffff;
+    background: @surface0;
 }
 
-/* you can set a style on hover for any module like this */
-#pulseaudio:hover {
-    background-color: #48219c;
+/* ------------------------------ Workspaces -------------------------------- */
+#workspaces {
+    background: transparent;
+    padding: 0 4px;
 }
 
 #workspaces button {
-    padding: 0 5px;
-    background-color: transparent;
-    color: #ffffff;
+    padding: 0 8px;
+    margin: 0 2px;
+    background: transparent;
+    color: @subtext0;
+    border-radius: 12px;
+    min-width: 12px;
 }
 
 #workspaces button:hover {
-    background: rgba(0, 0, 0, 0.2);
+    background: @surface0;
+    color: @text;
 }
 
 #workspaces button.focused,
 #workspaces button.active {
-    background-color: #64727d;
-    box-shadow: inset 0 -3px #ffffff;
+    background: @surface1;
+    color: @lavender;
 }
 
 #workspaces button.urgent {
-    background-color: #eb4d4b;
+    background: rgba(243, 139, 168, 0.25);
+    color: @red;
 }
 
 #mode {
-    background-color: #64727d;
-    box-shadow: inset 0 -3px #ffffff;
+    background: @surface1;
+    color: @lavender;
+    border-radius: 12px;
+    padding: 0 10px;
 }
 
+/* --------------------------- Общий стиль модулей -------------------------- */
 #clock,
 #battery,
 #cpu,
@@ -103,154 +137,167 @@ button:hover {
 #wireplumber,
 #custom-media,
 #tray,
-#mode,
 #idle_inhibitor,
 #scratchpad,
 #power-profiles-daemon,
-#mpd {
-    padding: 0 10px;
-    color: #ffffff;
+#mpd,
+#language,
+#keyboard-state,
+#privacy {
+    padding: 0 12px;
+    margin: 0 2px;
+    color: @subtext1;
+    background: transparent;
+    border-radius: 12px;
+    transition: all 0.2s ease-in-out;
 }
 
-#window,
-#workspaces {
-    margin: 0 4px;
+/* лёгкая подложка на ховере — единственный "фон", который появляется */
+#clock:hover,
+#battery:hover,
+#cpu:hover,
+#memory:hover,
+#disk:hover,
+#temperature:hover,
+#backlight:hover,
+#network:hover,
+#pulseaudio:hover,
+#wireplumber:hover,
+#tray:hover,
+#idle_inhibitor:hover {
+    background: @surface0;
+    color: @text;
 }
 
-/* If workspaces is the leftmost module, omit left margin */
-.modules-left > widget:first-child > #workspaces {
-    margin-left: 0;
-}
-
-/* If workspaces is the rightmost module, omit right margin */
-.modules-right > widget:last-child > #workspaces {
-    margin-right: 0;
-}
-
+/* ---------------------------------- Часы ----------------------------------- */
 #clock {
-    background-color: #5849fc;
+    color: @lavender;
+    font-weight: 600;
 }
 
+/* --------------------------------- Батарея ---------------------------------- */
 #battery {
-    background-color: #5849fc;
-    color: #ffffff;
+    color: @green;
 }
 
 #battery.charging,
 #battery.plugged {
-    color: #ffffff;
-    background-color: #26a65b;
+    color: @teal;
 }
 
 @keyframes blink {
     to {
-        background-color: #ffffff;
-        color: #000000;
+        color: @base;
     }
 }
 
-/* Using steps() instead of linear as a timing function to limit cpu usage */
 #battery.critical:not(.charging) {
-    background-color: #f53c3c;
-    color: #ffffff;
+    color: @red;
     animation-name: blink;
-    animation-duration: 0.5s;
+    animation-duration: 1s;
     animation-timing-function: steps(12);
     animation-iteration-count: infinite;
     animation-direction: alternate;
 }
 
-#power-profiles-daemon {
-    padding-right: 15px;
-}
-
+/* -------------------------- Power profiles daemon --------------------------- */
 #power-profiles-daemon.performance {
-    background-color: #f53c3c;
-    color: #ffffff;
+    color: @red;
 }
 
 #power-profiles-daemon.balanced {
-    background-color: #2980b9;
-    color: #ffffff;
+    color: @sapphire;
 }
 
 #power-profiles-daemon.power-saver {
-    background-color: #2ecc71;
-    color: #000000;
+    color: @green;
 }
 
-label:focus {
-    background-color: #000000;
-}
-
+/* ---------------------------------- CPU/RAM ---------------------------------- */
 #cpu {
-    background-color: #5849fc;
-    color: #ffffff;
+    color: @peach;
 }
 
 #memory {
-    background-color: #5849fc;
+    color: @mauve;
 }
 
 #disk {
-    background-color: #964b00;
+    color: @yellow;
 }
 
+#temperature {
+    color: @sky;
+}
+
+#temperature.critical {
+    color: @red;
+}
+
+/* -------------------------------- Подсветка ----------------------------------- */
 #backlight {
-    background-color: #90b1b1;
+    color: @yellow;
 }
 
+/* --------------------------------- Сеть ---------------------------------------- */
 #network {
-    background-color: #5849fc;
+    color: @blue;
 }
 
 #network.disconnected {
-    background-color: #f53c3c;
+    color: @red;
 }
 
+/* -------------------------------- Аудио ----------------------------------------- */
 #pulseaudio {
-    background-color: #5849fc;
-    color: #ffffff;
+    color: @pink;
 }
 
 #pulseaudio.muted {
-    background-color: #5849fc;
-    color: #ffffff;
+    color: @overlay0;
 }
 
 #wireplumber {
-    background-color: #fff0f5;
-    color: #000000;
+    color: @pink;
 }
 
 #wireplumber.muted {
-    background-color: #f53c3c;
+    color: @overlay0;
 }
 
+/* ------------------------------ Медиа плеер --------------------------------------- */
 #custom-media {
-    background-color: #66cc99;
-    color: #2a5c45;
+    color: @teal;
     min-width: 100px;
 }
 
 #custom-media.custom-spotify {
-    background-color: #66cc99;
+    color: @green;
 }
 
 #custom-media.custom-vlc {
-    background-color: #ffa000;
+    color: @peach;
 }
 
-#temperature {
-    background-color: #5849fc;
+#mpd {
+    color: @teal;
 }
 
-#temperature.critical {
-    background-color: #eb4d4b;
+#mpd.disconnected {
+    color: @red;
 }
 
+#mpd.stopped {
+    color: @overlay0;
+}
+
+#mpd.paused {
+    color: @subtext0;
+}
+
+/* ----------------------------------- Трей ------------------------------------------ */
 #tray {
-    background-color: #2980b9;
+    padding: 0 8px;
 }
 
 #tray > .passive {
@@ -259,84 +306,68 @@ label:focus {
 
 #tray > .needs-attention {
     -gtk-icon-effect: highlight;
-    background-color: #eb4d4b;
+    color: @red;
 }
 
+/* ------------------------------ Idle inhibitor -------------------------------------- */
 #idle_inhibitor {
-    background-color: #2d3436;
+    color: @subtext0;
 }
 
 #idle_inhibitor.activated {
-    background-color: #ecf0f1;
-    color: #2d3436;
+    color: @yellow;
 }
 
-#mpd {
-    background-color: #66cc99;
-    color: #2a5c45;
-}
-
-#mpd.disconnected {
-    background-color: #f53c3c;
-}
-
-#mpd.stopped {
-    background-color: #90b1b1;
-}
-
-#mpd.paused {
-    background-color: #51a37a;
-}
-
+/* ---------------------------------- Раскладка ---------------------------------------- */
 #language {
-    background: #00b093;
-    color: #740864;
-    padding: 0 3px;
-    margin: 0 3px;
+    color: @teal;
+    padding: 0 8px;
+    margin: 0 2px;
     min-width: 20px;
 }
 
 #keyboard-state {
-    background: #97e1ad;
-    color: #000000;
-    padding: 0 0px;
-    margin: 0 5px;
+    color: @subtext0;
+    padding: 0 4px;
+    margin: 0 2px;
     min-width: 16px;
 }
 
 #keyboard-state > label {
-    padding: 0 5px;
+    padding: 0 4px;
 }
 
 #keyboard-state > label.locked {
-    background: rgba(0, 0, 0, 0.2);
+    color: @yellow;
 }
 
+/* ---------------------------------- Scratchpad ----------------------------------------- */
 #scratchpad {
-    background: rgba(0, 0, 0, 0.2);
+    color: @subtext0;
 }
 
 #scratchpad.empty {
-    background-color: transparent;
+    color: @overlay0;
 }
 
+/* ----------------------------------- Privacy -------------------------------------------- */
 #privacy {
     padding: 0;
 }
 
 #privacy-item {
-    padding: 0 5px;
-    color: white;
+    padding: 0 6px;
+    color: @text;
 }
 
 #privacy-item.screenshare {
-    background-color: #cf5700;
+    color: @peach;
 }
 
 #privacy-item.audio-in {
-    background-color: #1ca000;
+    color: @green;
 }
 
 #privacy-item.audio-out {
-    background-color: #0069d4;
+    color: @blue;
 }

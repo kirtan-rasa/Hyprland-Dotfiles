@@ -1,0 +1,72 @@
+/* Wallpicker — Catppuccin Mocha, GTK4 */
+
+window.wallpicker-window {
+    background-color: rgba(24, 24, 37, 0.97);
+    border-radius: 16px;
+    border: 1px solid rgba(180, 190, 254, 0.18);
+}
+
+.wall-root {
+    padding: 24px;
+}
+
+.wall-grid {
+    background: transparent;
+}
+
+.wall-card {
+    background-color: rgba(49, 50, 68, 1);
+    border: 2px solid rgba(180, 190, 254, 0.08);
+    border-radius: 18px;
+    padding: 12px;
+    transition:
+        background-color 150ms ease-in-out,
+        border-color 150ms ease-in-out,
+        box-shadow 150ms ease-in-out;
+}
+
+flowboxchild {
+    border-radius: 18px;
+    padding: 0;
+}
+
+flowboxchild:selected .wall-card {
+    background-color: rgba(69, 71, 90, 1);
+    border-color: #cba6f7;
+    box-shadow: 0 0 24px rgba(203, 166, 247, 0.35);
+}
+
+flowboxchild:hover .wall-card {
+    background-color: rgba(69, 71, 90, 0.9);
+    border-color: rgba(180, 190, 254, 0.3);
+}
+
+.wall-thumb {
+    border-radius: 0px;
+}
+
+.wall-label {
+    color: #bac2de;
+    font-family: "JetBrainsMono Nerd Font", monospace;
+    font-size: 14px;
+    font-weight: 600;
+    padding-top: 4px;
+}
+
+flowboxchild:selected .wall-label {
+    color: #cdd6f4;
+}
+
+scrollbar {
+    background: transparent;
+}
+
+scrollbar slider {
+    background-color: rgba(180, 190, 254, 0.35);
+    border-radius: 8px;
+    min-width: 6px;
+}
+
+scrollbar slider:hover {
+    background-color: rgba(180, 190, 254, 0.55);
+}

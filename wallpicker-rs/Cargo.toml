@@ -1,0 +1,12 @@
+[package]
+name = "wallpicker"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+gtk4 = { version = "0.10", package = "gtk4", features = ["v4_10"] }
+gtk4-layer-shell = "0.7"
+
+[profile.release]
+opt-level = 3
+lto = true
