@@ -20,7 +20,7 @@ hl.monitor({
 local terminal    = "kitty"
 local fileManager = "nautilus"
 local menu        = "rofi -show drun -theme ~/.config/rofi/drun.rasi"
-local vpn = "/opt/FlClashX/FlClashX"   
+local vpn = "/opt/FlClashX/FlClashX"
 local browser = "flatpak run app.zen_browser.zen"
 
 -------------------
@@ -32,12 +32,24 @@ local browser = "flatpak run app.zen_browser.zen"
 -- Autostart necessary processes (like notifications daemons, status bars, etc.)
 -- Or execute your favorite apps at launch like this:
 
- hl.on("hyprland.start", function ()
-   hl.exec_cmd("dunst")
-   hl.exec_cmd("/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1")
-   hl.exec_cmd("waybar & hyprpaper & hypridle")
-   hl.exec_cmd("awww-daemon")
- end)
+hl.on("hyprland.start", function ()
+    hl.exec_cmd("dunst")
+    hl.exec_cmd("/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1")
+    hl.exec_cmd("hyprctl setcursor Adwaita 24")
+    hl.exec_cmd("waybar & hypridle")
+    hl.exec_cmd("awww-daemon")
+
+    -- Apps pinned to specific workspaces on login (see window_rule section below
+    -- for the matching workspace bindings)
+    hl.exec_cmd(browser)
+    hl.exec_cmd("flatpak run org.telegram.desktop")
+    hl.exec_cmd("anytype")
+    hl.exec_cmd("spotify")
+    hl.exec_cmd("figma-linux")
+    hl.exec_cmd("bitwarden")
+    hl.exec_cmd("kdeconnect-app")
+    hl.exec_cmd(vpn)
+end)
 
 
 -------------------------------
@@ -79,10 +91,10 @@ hl.config({
         gaps_in  = 5,
         gaps_out = 15,
 
-        border_size = 0,
+        border_size = 3,
 
         col = {
-            active_border   = { colors = {"rgba(33ccffee)", "rgba(00ff99ee)"}, angle = 45 },
+            active_border   = { colors = {"rgba(88c0d0ff)", "rgba(2e3440ff)"}, angle = 45 },
             inactive_border = "rgba(595959aa)",
         },
 
@@ -229,13 +241,6 @@ hl.gesture({
     action = "workspace"
 })
 
--- Example per-device config
--- See https://wiki.hypr.land/Configuring/Advanced-and-Cool/Devices/ for more
-hl.device({
-    name        = "epic-mouse-v1",
-    sensitivity = -0.5,
-})
-
 
 ---------------------
 ---- KEYBINDINGS ----
@@ -247,26 +252,51 @@ local mainMod = "SUPER" -- Sets "Windows" key as main modifier
 hl.bind(mainMod .. " + Return", hl.dsp.exec_cmd(terminal))
 hl.bind(mainMod .. " + B", hl.dsp.exec_cmd(browser))
 hl.bind(mainMod .. " + V", hl.dsp.exec_cmd(vpn))
-hl.bind("SUPER + T", hl.dsp.exec_cmd("flatpak run org.telegram.desktop"))
-hl.bind("SUPER + SHIFT + S", hl.dsp.exec_cmd("flameshot gui"))
-hl.bind("SUPER + W", hl.dsp.exec_cmd("~/wallpicker-rs/target/release/wallpicker"))
-hl.bind("SUPER + ESCAPE", hl.dsp.exec_cmd("~/.config/rofi/powermenu.sh"))
-hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
+hl.bind(mainMod .. " + T", hl.dsp.exec_cmd("flatpak run org.telegram.desktop"))
+hl.bind(mainMod .. " + SHIFT + S", hl.dsp.exec_cmd("flameshot gui"))
+hl.bind(mainMod .. " + F", hl.dsp.exec_cmd("figma-linux"))
+hl.bind(mainMod .. " + A", hl.dsp.exec_cmd("anytype"))
+hl.bind(mainMod .. " + S", hl.dsp.exec_cmd("spotify"))
+hl.bind(mainMod .. " + W", hl.dsp.exec_cmd("~/wallpicker-rs/target/release/wallpicker"))
+hl.bind(mainMod .. " + ESCAPE", hl.dsp.exec_cmd("~/.config/rofi/powermenu.sh"))
 hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit"))    -- dwindle only
-hl.bind(mainMod .. " + F", hl.dsp.window.pin())
+hl.bind(mainMod .. " + P", hl.dsp.window.pin())
+
+-- Scratchpad: send the focused window to a hidden special workspace,
+-- toggle it back into view from anywhere with mainMod + SHIFT + GRAVE.
+-- Handy for anything you want to summon on demand — calculator, eyedropper, etc.
+hl.bind(mainMod .. " + SHIFT + C", hl.dsp.window.move({ workspace = "special:scratch" }))
+hl.bind(mainMod .. " + TAB", hl.dsp.workspace.toggle_special("scratch"))
+
 local closeWindowBind = hl.bind(mainMod .. " + Q", hl.dsp.window.close())
 -- closeWindowBind:set_enabled(false)
-hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"))
+hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch exit"))
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
 hl.bind(mainMod .. " + R", hl.dsp.exec_cmd(menu))
-hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
-hl.bind("SUPER + SPACE", hl.dsp.window.float({ action = "toggle" }))
+hl.bind(mainMod .. " + C", hl.dsp.exec_cmd("gnome-calculator"))
+hl.bind(mainMod .. " + SHIFT + E", hl.dsp.exec_cmd("flatpak run com.github.finefindus.eyedropper"))
+hl.bind(mainMod .. " + SHIFT + B", hl.dsp.exec_cmd("bitwarden"))
+hl.bind(mainMod .. " + Z", hl.dsp.exec_cmd("~/.local/bin/zed"))
+hl.bind(mainMod .. " + SPACE", hl.dsp.window.float({ action = "toggle" }))
 
 -- Move focus with mainMod + arrow keys
 hl.bind(mainMod .. " + left",  hl.dsp.focus({ direction = "left" }))
 hl.bind(mainMod .. " + right", hl.dsp.focus({ direction = "right" }))
 hl.bind(mainMod .. " + up",    hl.dsp.focus({ direction = "up" }))
 hl.bind(mainMod .. " + down",  hl.dsp.focus({ direction = "down" }))
+
+-- Resize windows with mainMod + SHIFT + arrow keys
+hl.bind(mainMod .. " + SHIFT + left",  hl.dsp.window.resize({ x = -20, y = 0,   relative = true }), { repeating = true })
+hl.bind(mainMod .. " + SHIFT + right", hl.dsp.window.resize({ x = 20,  y = 0,   relative = true }), { repeating = true })
+hl.bind(mainMod .. " + SHIFT + up",    hl.dsp.window.resize({ x = 0,   y = -20, relative = true }), { repeating = true })
+hl.bind(mainMod .. " + SHIFT + down",  hl.dsp.window.resize({ x = 0,   y = 20,  relative = true }), { repeating = true })
+
+-- Swap windows with mainMod + CTRL + arrow keys (dwindle-specific, via raw dispatch —
+-- the Lua API has no direct directional swap yet as of Hyprland 0.55/0.56)
+hl.bind(mainMod .. " + CTRL + left",  hl.dsp.exec_cmd("hyprctl dispatch layoutmsg 'swapwindow l'"))
+hl.bind(mainMod .. " + CTRL + right", hl.dsp.exec_cmd("hyprctl dispatch layoutmsg 'swapwindow r'"))
+hl.bind(mainMod .. " + CTRL + up",    hl.dsp.exec_cmd("hyprctl dispatch layoutmsg 'swapwindow u'"))
+hl.bind(mainMod .. " + CTRL + down",  hl.dsp.exec_cmd("hyprctl dispatch layoutmsg 'swapwindow d'"))
 
 -- Switch workspaces with mainMod + [0-9]
 -- Move active window to a workspace with mainMod + SHIFT + [0-9]
@@ -282,8 +312,6 @@ hl.config({
     }
 })
 
--- Example special workspace (scratchpad)
-hl.bind(mainMod .. " + S",         hl.dsp.workspace.toggle_special("magic"))
 
 -- Scroll through existing workspaces with mainMod + scroll
 hl.bind(mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }))
@@ -341,6 +369,24 @@ hl.window_rule({
     no_focus = true,
 })
 
+-- flow calculator
+hl.window_rule({
+    name  = "float-calculator",
+    match = { class = "org.gnome.Calculator" },
+    float = true,
+    center = true,
+    size  = "400 500",
+})
+
+-- flow eyedropper
+hl.window_rule({
+    name  = "float-eyedropper",
+    match = { class = "com.github.finefindus.eyedropper" },
+    float = true,
+    center = true,
+    size  = "600 700",
+})
+
 -- Layer rules also return a handle.
 -- local overlayLayerRule = hl.layer_rule({
 --     name  = "no-anim-overlay",
@@ -356,4 +402,61 @@ hl.window_rule({
 
     move  = "20 monitor_h-120",
     float = true,
+})
+
+-----------------------------------------------
+---- WORKSPACE ASSIGNMENT FOR AUTOSTART APPS ----
+-----------------------------------------------
+
+-- IMPORTANT: the `class` values below are best-guess based on common package
+-- names. Verify the real class of each app with:
+--   hyprctl clients | grep -i class
+-- and correct any mismatches, or the rule will silently not match.
+
+hl.window_rule({
+    name  = "ws-zen-browser",
+    match = { class = "zen" },
+    workspace = 1,
+})
+
+hl.window_rule({
+    name  = "ws-telegram",
+    match = { class = "org.telegram.desktop" },
+    workspace = 2,
+})
+
+hl.window_rule({
+    name  = "ws-anytype",
+    match = { class = "anytype" },
+    workspace = 3,
+})
+
+hl.window_rule({
+    name  = "ws-spotify",
+    match = { class = "Spotify" },
+    workspace = 4,
+})
+
+hl.window_rule({
+    name  = "ws-figma",
+    match = { class = "figma-linux" },
+    workspace = 5,
+})
+
+hl.window_rule({
+    name  = "ws-bitwarden",
+    match = { class = "Bitwarden" },
+    workspace = 6,
+})
+
+hl.window_rule({
+    name  = "ws-kdeconnect",
+    match = { class = "org.kde.kdeconnect.app" },
+    workspace = 9,
+})
+
+hl.window_rule({
+    name  = "ws-flclashx",
+    match = { class = "FlClashX" },
+    workspace = 10,
 })

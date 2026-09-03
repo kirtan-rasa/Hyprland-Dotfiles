@@ -4,34 +4,26 @@
   "position": "top", // Waybar position (top|bottom|left|right)
   "height": 45, // Waybar height (to be removed for auto height)
   "width": 1570, // Waybar width
-  "spacing": 6, // Gaps between modules
+  "spacing": 5, // Gaps between modules
   "margin": "10 10 0 0",
 
   // Choose the order of the modules
   "modules-left": [
-    //"hyprland/mode",
-    //"hyprland/scratchpad",
-    "custom/media",
-    "network",
-    "pulseaudio",
-    "power-profiles-daemon",
-    "clock",
-    "idle_inhibitor",
+    "cpu",
+    "memory",
+    "custom/cava_mviz",
   ],
 
   "modules-center": ["hyprland/workspaces"],
 
   "modules-right": [
-    "custom/cava_mviz",
-    "cpu",
-    "memory",
-    //"backlight",
-    //"keyboard-state",
-    "hyprland/language",
+    "idle_inhibitor",
+    "pulseaudio",
     "battery",
-    //"battery#bat2",
-    //"tray",
-    "custom/power",
+    "hyprland/language",
+    "clock",
+    "network",
+    "backlight",
   ],
 
   // Modules configuration
@@ -69,6 +61,15 @@
   },
   "hyprland/mode": {
     "format": "<span style=\"italic\">{}</span>",
+  },
+
+  "hyprland/language": {
+    "format": "{short}",
+    "format-icons": {
+        "English": "US",
+        "Russian": "RU"
+    },
+    "tooltip": true
   },
   "hyprland/scratchpad": {
     "format": "{icon} {count}",
@@ -119,16 +120,16 @@
     // }
   },
   "clock": {
-    // "timezone": "America/New_York",
-    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-    "format-alt": "{:%Y-%m-%d}",
+    "format": " {:%H:%M}",
+    "format-alt": " {:%d.%m.%Y}",
+    "tooltip-format": "<tt><small>{calendar}</small></tt>"
   },
   "cpu": {
     "format": "{usage}% ",
     "tooltip": false,
   },
   "memory": {
-    "format": "{}% ",
+    "format": "{}%   ",
   },
   "temperature": {
     "thermal-zone": 2,
@@ -174,7 +175,7 @@
   },
   "network": {
     // "interface": "wlp2*", // (Optional) To force the use of this interface
-    "format-wifi": "{essid} ({signalStrength}%) ",
+    "format-wifi": " ",
     "format-ethernet": "{ipaddr}/{cidr} ",
     "tooltip-format": "{ifname} via {gwaddr} ",
     "format-linked": "{ifname} (No IP) ",
@@ -186,9 +187,9 @@
     "format": "{volume}% {icon} {format_source}",
     "format-bluetooth": "{volume}% {icon} {format_source}",
     "format-bluetooth-muted": " {icon} {format_source}",
-    "format-muted": " {format_source}",
-    "format-source": "{volume}% ",
-    "format-source-muted": "",
+    "format-muted": " {format_source}",
+    "format-source": " / ",
+    "format-source-muted": " / ",
     "format-icons": {
       "headphone": "",
       "hands-free": "",
@@ -200,28 +201,6 @@
     },
     "on-click": "pavucontrol",
   },
-  "custom/media": {
-    "format": "{icon} {text}",
-    "return-type": "json",
-    "max-length": 40,
-    "format-icons": {
-      "spotify": "",
-      "default": "🎜",
-    },
-    "escape": true,
-    "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null", // Script in resources folder
-    // "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
-  },
-  "custom/power": {
-    "format": "⏻ ",
-    "tooltip": false,
-    "menu": "on-click",
-    "menu-file": "$HOME/.config/waybar/power_menu.xml", // Menu file in resources folder
-    "menu-actions": {
-      "shutdown": "shutdown",
-      "reboot": "reboot",
-      "suspend": "systemctl suspend",
-      "hibernate": "systemctl hibernate",
-    },
-  },
+
+  }
 }

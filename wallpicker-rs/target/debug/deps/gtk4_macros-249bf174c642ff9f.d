@@ -1,0 +1,9 @@
+/home/kirtan-rasa/Hyprland-Dotfiles/wallpicker-rs/target/debug/deps/gtk4_macros-249bf174c642ff9f.d: /home/kirtan-rasa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/gtk4-macros-0.10.3/src/lib.rs /home/kirtan-rasa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/gtk4-macros-0.10.3/src/attribute_parser.rs /home/kirtan-rasa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/gtk4-macros-0.10.3/src/composite_template_derive.rs /home/kirtan-rasa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/gtk4-macros-0.10.3/src/template_callbacks_attribute.rs /home/kirtan-rasa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/gtk4-macros-0.10.3/src/util.rs
+
+/home/kirtan-rasa/Hyprland-Dotfiles/wallpicker-rs/target/debug/deps/libgtk4_macros-249bf174c642ff9f.so: /home/kirtan-rasa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/gtk4-macros-0.10.3/src/lib.rs /home/kirtan-rasa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/gtk4-macros-0.10.3/src/attribute_parser.rs /home/kirtan-rasa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/gtk4-macros-0.10.3/src/composite_template_derive.rs /home/kirtan-rasa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/gtk4-macros-0.10.3/src/template_callbacks_attribute.rs /home/kirtan-rasa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/gtk4-macros-0.10.3/src/util.rs
+
+/home/kirtan-rasa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/gtk4-macros-0.10.3/src/lib.rs:
+/home/kirtan-rasa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/gtk4-macros-0.10.3/src/attribute_parser.rs:
+/home/kirtan-rasa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/gtk4-macros-0.10.3/src/composite_template_derive.rs:
+/home/kirtan-rasa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/gtk4-macros-0.10.3/src/template_callbacks_attribute.rs:
+/home/kirtan-rasa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/gtk4-macros-0.10.3/src/util.rs:

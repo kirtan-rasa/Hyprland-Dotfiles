@@ -1,4 +1,4 @@
-/* Rofi drun (app launcher) — Catppuccin Mocha, в стиле остальных меню */
+/* Rofi drun (app launcher) */
 
 configuration {
     show-icons: true;

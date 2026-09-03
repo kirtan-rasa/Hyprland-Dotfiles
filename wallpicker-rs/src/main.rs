@@ -32,12 +32,7 @@ fn cache_dir() -> PathBuf {
     dir
 }
 
-/// Возвращает путь к готовой уменьшенной миниатюре на диске.
-/// Если кеш уже существует и не устарел (исходник не менялся после
-/// последней генерации) — просто отдаёт путь без какой-либо работы.
-/// Иначе генерирует PNG 340x191 один раз и сохраняет его — вся тяжёлая
-/// работа (полное декодирование оригинала) выполняется только один раз
-/// за всё время жизни файла обоев, а не при каждом запуске программы.
+
 fn cached_thumbnail_path(original: &std::path::Path) -> Option<PathBuf> {
     let file_name = original.file_name()?.to_str()?;
     let thumb_path = cache_dir().join(format!("{file_name}.thumb.png"));
@@ -47,7 +42,7 @@ fn cached_thumbnail_path(original: &std::path::Path) -> Option<PathBuf> {
 
     let needs_regen = match (original_mtime, thumb_mtime) {
         (Some(orig), Some(thumb)) => orig > thumb,
-        _ => true, // кеша нет или не удалось прочитать метаданные — генерируем
+        _ => true,
     };
 
     if needs_regen {
@@ -75,8 +70,6 @@ fn collect_wallpapers() -> Vec<PathBuf> {
 
 fn set_wallpaper(path: &std::path::Path) {
     let path = path.to_path_buf();
-    // Запускаем awww в отдельном процессе, не дожидаясь завершения —
-    // чтобы окно picker'а закрылось мгновенно, не блокируясь на анимации перехода.
     let _ = Command::new("awww")
         .arg("img")
         .arg(&path)
@@ -98,10 +91,6 @@ fn build_ui(app: &gtk::Application) {
     window.set_keyboard_mode(KeyboardMode::Exclusive);
     window.set_namespace(Some("wallpicker"));
 
-    // Без anchor — окно плавает по центру (компоновщик сам центрирует
-    // top-level layer-shell окна без anchor на большинстве wlroots-based
-    // композиторов, включая Hyprland). Фиксированный размер задаём явно,
-    // чтобы FlowBox точно знал доступную ширину и не схлопывался.
     window.set_default_size(1200, 700);
     window.set_width_request(1200);
     window.set_height_request(700);
@@ -117,24 +106,20 @@ fn build_ui(app: &gtk::Application) {
     flow.set_column_spacing(16);
     flow.set_homogeneous(true);
     flow.add_css_class("wall-grid");
-    // Явно фиксируем ширину сетки — 3 колонки по 360px + 2 промежутка по 16px.
-    flow.set_size_request(1200 - 48, -1); // минус паддинг root (24px * 2)
+    flow.set_size_request(1200 - 48, -1);
 
-    // Храним пути параллельно виджетам, чтобы по индексу ребёнка найти файл.
     let paths: Rc<RefCell<Vec<PathBuf>>> = Rc::new(RefCell::new(wallpapers.clone()));
 
     for wp in &wallpapers {
         let card = gtk::Box::new(gtk::Orientation::Vertical, 6);
         card.add_css_class("wall-card");
 
-        // Берём готовую миниатюру из кеша (генерируется один раз на файл,
-        // а не при каждом запуске программы — см. cached_thumbnail_path).
         let picture = match cached_thumbnail_path(wp) {
             Some(thumb) => gtk::Picture::for_filename(&thumb),
-            None => gtk::Picture::for_filename(wp), // фоллбэк, если кеш не удался
+            None => gtk::Picture::for_filename(wp),
         };
         picture.set_content_fit(gtk::ContentFit::Contain);
-        picture.set_size_request(340, 191); // 16:9, подогнано под 3 колонки в 1200px
+        picture.set_size_request(340, 191);
         picture.add_css_class("wall-thumb");
 
         let label = gtk::Label::new(
@@ -150,7 +135,6 @@ fn build_ui(app: &gtk::Application) {
         flow.append(&card);
     }
 
-    // Выделяем первый элемент по умолчанию, чтобы Enter сразу работал.
     if let Some(first_child) = flow.child_at_index(0) {
         flow.select_child(&first_child);
     }
@@ -158,9 +142,6 @@ fn build_ui(app: &gtk::Application) {
     let scrolled = gtk::ScrolledWindow::new();
     scrolled.set_child(Some(&flow));
     scrolled.set_policy(gtk::PolicyType::Never, gtk::PolicyType::Automatic);
-    // Жёстко фиксируем размер вьюпорта — без этого ScrolledWindow пытается
-    // вычислить "естественный" размер контента и в связке с layer-shell
-    // это ломает расчёт колонок FlowBox (сворачивает всё в 1 колонку).
     scrolled.set_size_request(1200 - 48, 700 - 48);
 
     let root = gtk::Box::new(gtk::Orientation::Vertical, 0);
@@ -170,7 +151,6 @@ fn build_ui(app: &gtk::Application) {
     window.set_child(Some(&root));
     window.add_css_class("wallpicker-window");
 
-    // ---- Обработка клавиш: Enter применяет обои, Esc закрывает окно ----
     let key_controller = gtk::EventControllerKey::new();
     let win_for_keys = window.clone();
     let flow_for_keys = flow.clone();
@@ -197,7 +177,6 @@ fn build_ui(app: &gtk::Application) {
     });
     window.add_controller(key_controller);
 
-    // Двойной клик / Enter на самом FlowBox тоже применяет выбор мышью.
     let win_for_click = window.clone();
     let paths_for_click = paths.clone();
     flow.connect_child_activated(move |_, child| {

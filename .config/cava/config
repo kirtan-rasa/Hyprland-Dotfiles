@@ -1,5 +1,3 @@
-# /* ----------- 💫 https://github.com/JaKooLit 💫 -------- */ #
-
 ## Configuration file for CAVA. Default values are commented out. Use either ';' or '#' for commenting.
 
 
@@ -9,7 +7,7 @@
 ; mode = normal
 
 # Accepts only non-negative values.
-; framerate = 60
+; framerate = 120
 
 # 'autosens' will attempt to decrease sensitivity if the bars peak. 1 = on, 0 = off
 # new as of 0.6.0 autosens of low values (dynamic range)
@@ -142,7 +140,7 @@ source = auto
 
 [color]
 
-gradient = 1
+gradient = 0
 
 gradient_count = 8
 gradient_color_1 = '#030508'
