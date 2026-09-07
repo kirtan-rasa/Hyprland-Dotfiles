@@ -8,7 +8,7 @@
 
 <h3 align="center">
   <img src="https://github.com/JaKooLit/Telegram-Animated-Emojis/blob/main/Activity/Sparkles.webp" alt="Sparkles" width="38" height="38" />
-  Simple Hyprland Dotfiles — Work in Progress
+  Simple Hyprland Dotfiles
   <img src="https://github.com/JaKooLit/Telegram-Animated-Emojis/blob/main/Activity/Sparkles.webp" alt="Sparkles" width="38" height="38" />
 </h3>
 
@@ -16,7 +16,6 @@
 
 This is my personal Hyprland configuration — **light, simple, and constantly improving**.
 
-**Work in progress!** I'm going to make this really better in 2026. Stay tuned and [follow me on GitHub](https://github.com/kirtan-rasa) for updates.
 
 ---
 
