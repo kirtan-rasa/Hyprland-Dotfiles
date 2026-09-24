@@ -22,7 +22,7 @@
     "battery",
     "hyprland/language",
     "clock",
-    "network",
+    "custom/wifi",
     "backlight",
   ],
 
@@ -173,15 +173,16 @@
       "power-saver": "",
     },
   },
-  "network": {
-    // "interface": "wlp2*", // (Optional) To force the use of this interface
-    "format-wifi": " ",
-    "format-ethernet": "{ipaddr}/{cidr} ",
-    "tooltip-format": "{ifname} via {gwaddr} ",
-    "format-linked": "{ifname} (No IP) ",
-    "format-disconnected": "Disconnected ⚠",
-    "format-alt": "{ifname}: {ipaddr}/{cidr}",
+  "custom/wifi": {
+    "exec": "$HOME/.config/waybar/scripts/WaybarWifi.sh",
+    "return-type": "json",
+    "format": "{}",
+    "interval": 5,
+    "on-click": "$HOME/.config/waybar/scripts/WifiMenu.sh",
+    "on-click-right": "nmcli radio wifi | grep -q enabled && nmcli radio wifi off || nmcli radio wifi on",
+    "tooltip": true,
   },
+
   "pulseaudio": {
     // "scroll-step": 1, // %, can be a float
     "format": "{volume}% {icon} {format_source}",

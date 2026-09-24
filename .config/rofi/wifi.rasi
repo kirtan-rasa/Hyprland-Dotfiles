@@ -1,0 +1,117 @@
+/* Rofi theme for the WiFi menu — matches your waybar style */
+
+* {
+    base:      #1B2335;
+    surface0:  rgba(49, 50, 68, 0.75);
+    surface1:  rgba(69, 71, 90, 0.85);
+    accent:    #89b4fa;
+    text:      #cdd6f4;
+    subtext:   #bac2de;
+    overlay:   #6c7086;
+    urgent:    #f38ba8;
+    panel:     #1F2A3E;
+
+    background-color: transparent;
+    text-color:       @text;
+    font:             "JetBrainsMono Nerd Font 12";
+}
+
+window {
+    location:         north east;
+    anchor:           north east;
+    x-offset:         -10px;
+    y-offset:         62px;          /* below the bar: margin 10 + height 45 + gap */
+    width:            420px;
+    background-color: @base;
+    border:           1px solid;
+    border-color:     rgba(75, 90, 120, 0.3);
+    border-radius:    16px;
+    padding:          10px;
+}
+
+mainbox {
+    spacing:  8px;
+    children: [ inputbar, message, listview ];
+}
+
+/* --------------------------------- Input field --------------------------------- */
+inputbar {
+    background-color: @panel;
+    border-radius:    12px;
+    padding:          8px 12px;
+    spacing:          8px;
+    children:         [ prompt, entry ];
+}
+
+prompt {
+    text-color: @accent;
+    font:       "JetBrainsMono Nerd Font Bold 12";
+}
+
+entry {
+    placeholder:       "search...";
+    placeholder-color: @overlay;
+    text-color:        @text;
+}
+
+message {
+    background-color: @surface0;
+    border-radius:    12px;
+    padding:          8px 12px;
+}
+
+textbox {
+    text-color: @subtext;
+}
+
+/* ---------------------------------- List ----------------------------------- */
+listview {
+    lines:        10;
+    columns:      1;
+    fixed-height: false;
+    scrollbar:    false;
+    spacing:      2px;
+    cycle:        true;
+    dynamic:      true;
+}
+
+element {
+    padding:          8px 12px;
+    border-radius:    12px;
+    background-color: transparent;
+    text-color:       @text;
+}
+
+element normal.normal,
+element alternate.normal {
+    background-color: transparent;
+    text-color:       @text;
+}
+
+element selected.normal {
+    background-color: @surface1;
+    text-color:       @accent;
+}
+
+element normal.active,
+element alternate.active {
+    text-color: @accent;
+}
+
+element selected.active {
+    background-color: @surface1;
+    text-color:       @accent;
+}
+
+element normal.urgent,
+element alternate.urgent,
+element selected.urgent {
+    text-color: @urgent;
+}
+
+element-text {
+    background-color: transparent;
+    text-color:       inherit;
+    highlight:        bold #89b4fa;
+    vertical-align:   0.5;
+}

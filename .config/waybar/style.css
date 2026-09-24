@@ -114,6 +114,7 @@ button:hover {
 #temperature,
 #backlight,
 #network,
+#custom-wifi,
 #pulseaudio,
 #wireplumber,
 #custom-media,
@@ -141,6 +142,7 @@ button:hover {
 #temperature:hover,
 #backlight:hover,
 #network:hover,
+#custom-wifi:hover,
 #pulseaudio:hover,
 #wireplumber:hover,
 #tray:hover,
@@ -229,6 +231,47 @@ button:hover {
     color: #f38ba8;
 }
 
+/* ------------------------------------ WiFi (custom) --------------------------------- */
+#custom-wifi {
+    color: @text;
+    font-size: 15px;
+}
+
+/* Подключён, сигнал нормальный */
+#custom-wifi.connected {
+    color: @accent;
+}
+
+/* Слабый сигнал */
+#custom-wifi.weak {
+    color: #FFBE77;
+}
+
+/* Ethernet */
+#custom-wifi.ethernet {
+    color: #a6e3a1;
+}
+
+/* WiFi включён, но нет подключения */
+#custom-wifi.disconnected {
+    color: #f38ba8;
+}
+
+/* WiFi выключен */
+#custom-wifi.off {
+    color: @overlay;
+}
+
+/* Hover должен перебивать цвета состояний */
+#custom-wifi.connected:hover,
+#custom-wifi.weak:hover,
+#custom-wifi.ethernet:hover,
+#custom-wifi.disconnected:hover,
+#custom-wifi.off:hover {
+    background: @surface0;
+    color: @accent;
+}
+
 /* -------------------------------- Audio ----------------------------------------- */
 #pulseaudio {
     color: #EDC8C8;
@@ -300,4 +343,16 @@ button:hover {
 
 #privacy-item.audio-out {
     color: @text;
+}
+
+/* ------------------------------------- Tooltip ---------------------------------------------- */
+tooltip {
+    background: @base;
+    border: 1px solid rgba(75, 90, 120, 0.3);
+    border-radius: 12px;
+}
+
+tooltip label {
+    color: @text;
+    padding: 2px 4px;
 }

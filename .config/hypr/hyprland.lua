@@ -17,7 +17,7 @@ hl.monitor({
 ---------------------
 
 -- Set programs that you use
-local terminal    = "kitty"
+local terminal    = "ghostty"
 local fileManager = "nautilus"
 local menu        = "rofi -show drun -theme ~/.config/rofi/drun.rasi"
 local vpn = "/opt/FlClashX/FlClashX"
@@ -35,8 +35,7 @@ local browser = "flatpak run app.zen_browser.zen"
 hl.on("hyprland.start", function ()
     hl.exec_cmd("dunst")
     hl.exec_cmd("/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1")
-    hl.exec_cmd("hyprctl setcursor Adwaita 24")
-    hl.exec_cmd("waybar & hypridle")
+    hl.exec_cmd("waybar & hypridle & vicinae server")
     hl.exec_cmd("awww-daemon")
 
     -- Apps pinned to specific workspaces on login (see window_rule section below
@@ -44,7 +43,7 @@ hl.on("hyprland.start", function ()
     hl.exec_cmd(browser)
     hl.exec_cmd("flatpak run org.telegram.desktop")
     hl.exec_cmd("anytype")
-    hl.exec_cmd("spotify")
+    hl.exec_cmd("flatpak run com.spotify.Client")
     hl.exec_cmd("figma-linux")
     hl.exec_cmd("bitwarden")
     hl.exec_cmd("kdeconnect-app")
@@ -241,6 +240,13 @@ hl.gesture({
     action = "workspace"
 })
 
+-- Example per-device config
+-- See https://wiki.hypr.land/Configuring/Advanced-and-Cool/Devices/ for more
+-- hl.device({
+--     name        = "your-mouse-name-here",
+--     sensitivity = -0.5,
+-- })
+
 
 ---------------------
 ---- KEYBINDINGS ----
@@ -268,8 +274,7 @@ hl.bind(mainMod .. " + P", hl.dsp.window.pin())
 hl.bind(mainMod .. " + SHIFT + C", hl.dsp.window.move({ workspace = "special:scratch" }))
 hl.bind(mainMod .. " + TAB", hl.dsp.workspace.toggle_special("scratch"))
 
-local closeWindowBind = hl.bind(mainMod .. " + Q", hl.dsp.window.close())
--- closeWindowBind:set_enabled(false)
+hl.bind(mainMod .. " + Q", hl.dsp.window.close())
 hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch exit"))
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
 hl.bind(mainMod .. " + R", hl.dsp.exec_cmd(menu))
@@ -345,14 +350,13 @@ hl.bind("XF86AudioPrev",  hl.dsp.exec_cmd("playerctl previous"),   { locked = tr
 
 -- Example window rules that are useful
 
-local suppressMaximizeRule = hl.window_rule({
+hl.window_rule({
     -- Ignore maximize requests from all apps. You'll probably like this.
     name  = "suppress-maximize-events",
     match = { class = ".*" },
 
     suppress_event = "maximize",
 })
--- suppressMaximizeRule:set_enabled(false)
 
 hl.window_rule({
     -- Fix some dragging issues with XWayland
@@ -369,7 +373,7 @@ hl.window_rule({
     no_focus = true,
 })
 
--- flow calculator
+-- Auto-float the calculator
 hl.window_rule({
     name  = "float-calculator",
     match = { class = "org.gnome.Calculator" },
@@ -378,22 +382,14 @@ hl.window_rule({
     size  = "400 500",
 })
 
--- flow eyedropper
+-- Auto-float the eyedropper
 hl.window_rule({
     name  = "float-eyedropper",
     match = { class = "com.github.finefindus.eyedropper" },
     float = true,
     center = true,
-    size  = "600 700",
+    size  = "600 700",  -- adjust size to taste
 })
-
--- Layer rules also return a handle.
--- local overlayLayerRule = hl.layer_rule({
---     name  = "no-anim-overlay",
---     match = { namespace = "^my-overlay$" },
---     no_anim = true,
--- })
--- overlayLayerRule:set_enabled(false)
 
 -- Hyprland-run windowrule
 hl.window_rule({
@@ -415,7 +411,7 @@ hl.window_rule({
 
 hl.window_rule({
     name  = "ws-zen-browser",
-    match = { class = "zen" },
+    match = { class = "app.zen_browser.zen" },
     workspace = 1,
 })
 
@@ -428,13 +424,22 @@ hl.window_rule({
 hl.window_rule({
     name  = "ws-anytype",
     match = { class = "anytype" },
-    workspace = 3,
+    workspace = 2,
 })
 
 hl.window_rule({
     name  = "ws-spotify",
-    match = { class = "Spotify" },
+    match = { class = "com.spotify.Client" },
+    workspace = 3,
+})
+
+hl.window_rule({
+    name  = "ws-zoom",
+    match = { class = "zoom" },
     workspace = 4,
+    no_initial_focus = true,
+    suppress_event = "activatefocus",
+    float = true,
 })
 
 hl.window_rule({
@@ -457,6 +462,6 @@ hl.window_rule({
 
 hl.window_rule({
     name  = "ws-flclashx",
-    match = { class = "FlClashX" },
+    match = { class = "Com.follow.clashx" },
     workspace = 10,
 })
