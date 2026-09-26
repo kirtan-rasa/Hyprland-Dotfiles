@@ -31,15 +31,17 @@ PKGS=(
     hyprland hypridle hyprlock
     waybar
     rofi-wayland
-    kitty
+    ghostty
     dunst
     fastfetch
     cava
+    NetworkManager NetworkManager-tui          # nmcli/nmtui, used by the waybar WiFi module + menu
     rustup
     gcc gcc-c++ make pkgconf-pkg-config
     gtk4-devel gtk4-layer-shell-devel
     cairo-devel pango-devel gdk-pixbuf2-devel graphene-devel glib2-devel
     grim slurp wl-clipboard      # common Hyprland helpers, remove if unused
+    flameshot                    # screenshot bind (SUPER+SHIFT+S)
 )
 
 if command -v dnf >/dev/null 2>&1; then
@@ -48,6 +50,10 @@ if command -v dnf >/dev/null 2>&1; then
 else
     warn "not on Fedora — install these manually: ${PKGS[*]}"
 fi
+
+log "note: ghostty replaces kitty as the default terminal — kitty is no longer required or installed"
+log "note: several autostart apps aren't packaged by dnf and need manual/flatpak install if you want them:"
+log "      zen browser, telegram, anytype, spotify, figma-linux, bitwarden, kdeconnect-app, FlClashX (VPN), vicinae, awww"
 
 # ---------------------------------------------------------------------------
 # 2. rust toolchain
@@ -135,7 +141,9 @@ fi
 for script in \
     "$CONFIG_DST/hypr/power_menu.sh" \
     "$CONFIG_DST/hypr/scripts/WaybarCava.sh" \
-    "$CONFIG_DST/rofi/powermenu.sh"
+    "$CONFIG_DST/rofi/powermenu.sh" \
+    "$CONFIG_DST/waybar/scripts/WaybarWifi.sh" \
+    "$CONFIG_DST/waybar/scripts/WifiMenu.sh"
 do
     [[ -e "$script" ]] && chmod +x "$script"
 done
