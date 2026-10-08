@@ -37,16 +37,9 @@ hl.on("hyprland.start", function ()
     hl.exec_cmd("/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1")
     hl.exec_cmd("waybar & hypridle & vicinae server")
     hl.exec_cmd("awww-daemon")
-
-    -- Apps pinned to specific workspaces on login (see window_rule section below
-    -- for the matching workspace bindings)
+    hl.exec_cmd("/.local/bin/cursor-restore daemon")
     hl.exec_cmd(browser)
     hl.exec_cmd("flatpak run org.telegram.desktop")
-    hl.exec_cmd("anytype")
-    hl.exec_cmd("flatpak run com.spotify.Client")
-    hl.exec_cmd("figma-linux")
-    hl.exec_cmd("bitwarden")
-    hl.exec_cmd("kdeconnect-app")
     hl.exec_cmd(vpn)
 end)
 
@@ -262,7 +255,7 @@ hl.bind(mainMod .. " + T", hl.dsp.exec_cmd("flatpak run org.telegram.desktop"))
 hl.bind(mainMod .. " + SHIFT + S", hl.dsp.exec_cmd("flameshot gui"))
 hl.bind(mainMod .. " + F", hl.dsp.exec_cmd("figma-linux"))
 hl.bind(mainMod .. " + A", hl.dsp.exec_cmd("anytype"))
-hl.bind(mainMod .. " + S", hl.dsp.exec_cmd("spotify"))
+hl.bind(mainMod .. " + S", hl.dsp.exec_cmd("flatpak run com.spotify.Client"))
 hl.bind(mainMod .. " + W", hl.dsp.exec_cmd("~/wallpicker-rs/target/release/wallpicker"))
 hl.bind(mainMod .. " + ESCAPE", hl.dsp.exec_cmd("~/.config/rofi/powermenu.sh"))
 hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit"))    -- dwindle only
@@ -302,7 +295,6 @@ hl.bind(mainMod .. " + CTRL + left",  hl.dsp.exec_cmd("hyprctl dispatch layoutms
 hl.bind(mainMod .. " + CTRL + right", hl.dsp.exec_cmd("hyprctl dispatch layoutmsg 'swapwindow r'"))
 hl.bind(mainMod .. " + CTRL + up",    hl.dsp.exec_cmd("hyprctl dispatch layoutmsg 'swapwindow u'"))
 hl.bind(mainMod .. " + CTRL + down",  hl.dsp.exec_cmd("hyprctl dispatch layoutmsg 'swapwindow d'"))
-
 -- Switch workspaces with mainMod + [0-9]
 -- Move active window to a workspace with mainMod + SHIFT + [0-9]
 for i = 1, 10 do
@@ -429,7 +421,7 @@ hl.window_rule({
 
 hl.window_rule({
     name  = "ws-spotify",
-    match = { class = "com.spotify.Client" },
+    match = { class = "com.spotify.client" },
     workspace = 3,
 })
 
