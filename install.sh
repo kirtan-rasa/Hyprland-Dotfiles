@@ -149,6 +149,7 @@ PKGS=(
     grim slurp wl-clipboard
     flameshot
     curl wget unzip fontconfig
+    cargo
 )
 
 if (( HAVE_DNF )); then
