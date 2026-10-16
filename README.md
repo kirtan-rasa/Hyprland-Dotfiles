@@ -35,9 +35,18 @@ This is my personal Hyprland configuration — **light, simple, and constantly i
 
 ### ✨ Recent additions
 
-- **WiFi menu for waybar** — a `custom/wifi` module (`WaybarWifi.sh`) shows signal strength and connection status in the bar; left-click opens a rofi menu (`WifiMenu.sh`) to scan, connect, forget networks, or drop into `nmtui` for advanced settings. Right-click toggles WiFi on/off. Needs `NetworkManager` (`nmcli`).
-- **Ghostty** replaced Kitty as the default terminal.
-- **Per-workspace app assignments** — autostart apps (browser, Telegram, Spotify, Figma, Bitwarden, KDE Connect, FlClashX, etc.) now land on dedicated workspaces via Hyprland window rules.
+**Waybar:**
+- Replace the built-in clock with a custom module: hover shows a
+  compact month calendar, click opens calcurse in a floating window
+
+**Installer:**
+- Set up Rust before anything that calls cargo
+- Build wallpicker-rs from a copy in `~/` instead of moving it out of
+  the repo, so reruns work
+- Skip unavailable packages and make COPR failures non-fatal
+- Install awww into `~/.local,` Apple Color Emoji, and calcurse
+- Skip fonts that are already installed
+- Add banner, step counter, spinner and a warning summary
 
 ---
 
