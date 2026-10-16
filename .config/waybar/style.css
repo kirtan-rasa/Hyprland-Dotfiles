@@ -43,6 +43,24 @@ window#waybar.hidden {
     margin-right: 10px;
 }
 
+#custom-clock {
+  color: #7aa2f7;
+  background: rgba(122, 162, 247, 0.12);
+  border-radius: 8px;
+  padding: 0 10px;
+}
+
+tooltip {
+  background: #1a1b26;
+  border: 1px solid #3b4261;
+  border-radius: 10px;
+}
+tooltip label {
+  font-family: "JetBrainsMono Nerd Font";
+  color: #c0caf5;
+  padding: 4px 6px;
+}
+
 #window,
 #workspaces {
     margin: 0 4px;

@@ -37,10 +37,11 @@ hl.on("hyprland.start", function ()
     hl.exec_cmd("/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1")
     hl.exec_cmd("waybar & hypridle & vicinae server")
     hl.exec_cmd("awww-daemon")
-    hl.exec_cmd("/.local/bin/cursor-restore daemon")
     hl.exec_cmd(browser)
     hl.exec_cmd("flatpak run org.telegram.desktop")
     hl.exec_cmd(vpn)
+    hl.exec_cmd("anytype")
+    hl.exec_cmd("flatpak run com.spotify.Client")
 end)
 
 
@@ -52,26 +53,6 @@ end)
 
 hl.env("XCURSOR_SIZE", "24")
 hl.env("HYPRCURSOR_SIZE", "24")
-
-
------------------------
------ PERMISSIONS -----
------------------------
-
--- See https://wiki.hypr.land/Configuring/Advanced-and-Cool/Permissions/
--- Please note permission changes here require a Hyprland restart and are not applied on-the-fly
--- for security reasons
-
--- hl.config({
---   ecosystem = {
---     enforce_permissions = true,
---   },
--- })
-
--- hl.permission("/usr/(bin|local/bin)/grim", "screencopy", "allow")
--- hl.permission("/usr/(lib|libexec|lib64)/xdg-desktop-portal-hyprland", "screencopy", "allow")
--- hl.permission("/usr/(bin|local/bin)/hyprpm", "plugin", "allow")
-
 
 -----------------------
 ---- LOOK AND FEEL ----
@@ -154,24 +135,6 @@ hl.animation({ leaf = "fade",    enabled = true, speed = 4,   bezier = "quick" }
 hl.animation({ leaf = "layers",     enabled = true, speed = 5, bezier = "spring", style = "slidefade 40%" })
 hl.animation({ leaf = "workspaces", enabled = true, speed = 4, bezier = "default", style = "slidefade 30%" })
 
--- Ref https://wiki.hypr.land/Configuring/Basics/Workspace-Rules/
--- "Smart gaps" / "No gaps when only"
--- uncomment all if you wish to use that.
--- hl.workspace_rule({ workspace = "w[tv1]", gaps_out = 0, gaps_in = 0 })
--- hl.workspace_rule({ workspace = "f[1]",   gaps_out = 0, gaps_in = 0 })
--- hl.window_rule({
---     name  = "no-gaps-wtv1",
---     match = { float = false, workspace = "w[tv1]" },
---     border_size = 0,
---     rounding    = 0,
--- })
--- hl.window_rule({
---     name  = "no-gaps-f1",
---     match = { float = false, workspace = "f[1]" },
---     border_size = 0,
---     rounding    = 0,
--- })
-
 -- See https://wiki.hypr.land/Configuring/Layouts/Dwindle-Layout/ for more
 hl.config({
     dwindle = {
@@ -192,18 +155,6 @@ hl.config({
         fullscreen_on_one_column = true,
     },
 })
-
-----------------
-----  MISC  ----
-----------------
-
-hl.config({
-    misc = {
-        force_default_wallpaper = -1,    -- Set to 0 or 1 to disable the anime mascot wallpapers
-        disable_hyprland_logo   = false, -- If true disables the random hyprland logo / anime girl background. :(
-    },
-})
-
 
 ---------------
 ---- INPUT ----
@@ -232,14 +183,6 @@ hl.gesture({
     direction = "horizontal",
     action = "workspace"
 })
-
--- Example per-device config
--- See https://wiki.hypr.land/Configuring/Advanced-and-Cool/Devices/ for more
--- hl.device({
---     name        = "your-mouse-name-here",
---     sensitivity = -0.5,
--- })
-
 
 ---------------------
 ---- KEYBINDINGS ----
@@ -416,12 +359,6 @@ hl.window_rule({
 hl.window_rule({
     name  = "ws-anytype",
     match = { class = "anytype" },
-    workspace = 2,
-})
-
-hl.window_rule({
-    name  = "ws-spotify",
-    match = { class = "com.spotify.client" },
     workspace = 3,
 })
 
@@ -435,8 +372,8 @@ hl.window_rule({
 })
 
 hl.window_rule({
-    name  = "ws-figma",
-    match = { class = "figma-linux" },
+    name  = "ws-spotify",
+    match = { class = "spotify" },
     workspace = 5,
 })
 
@@ -453,7 +390,15 @@ hl.window_rule({
 })
 
 hl.window_rule({
-    name  = "ws-flclashx",
+    name  = "ws-happ",
     match = { class = "Com.follow.clashx" },
     workspace = 10,
+})
+
+hl.window_rule({
+  name   = "calendar-popup",
+  match  = { class = "^com\\.user\\.calendar$" },
+  float  = true,
+  center = true,
+  size   = { "monitor_w * 0.5", "monitor_h * 0.6" },
 })

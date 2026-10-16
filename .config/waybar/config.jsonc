@@ -3,7 +3,7 @@
   // "layer": "top", // Waybar at top layer
   "position": "top", // Waybar position (top|bottom|left|right)
   "spacing": 5, // Gaps between modules
-  "height" : 45, 
+  "height" : 45,
   "margin": "15 15 0 15",
 
   // Choose the order of the modules
@@ -11,6 +11,7 @@
     "cpu",
     "memory",
     "custom/cava_mviz",
+    "power-profiles-daemon",
   ],
 
   "modules-center": ["hyprland/workspaces"],
@@ -20,7 +21,7 @@
     "pulseaudio",
     "battery",
     "hyprland/language",
-    "clock",
+    "custom/clock",
     "custom/wifi",
     "backlight",
   ],
@@ -148,7 +149,8 @@
       // "good": 95,
       "warning": 30,
       "critical": 15,
-    },
+  },
+
     "format": "{capacity}% {icon}",
     "format-full": "{capacity}% {icon}",
     "format-charging": "{capacity}% ",
@@ -201,6 +203,10 @@
     },
     "on-click": "pavucontrol",
   },
-
+  "custom/clock": {
+    "exec": "~/.config/waybar/scripts/clock.py",
+    "return-type": "json",
+    "on-click": "~/.config/waybar/scripts/calendar-popup.sh",
+  },
   }
 }
