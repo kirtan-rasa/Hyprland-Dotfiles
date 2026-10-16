@@ -295,12 +295,20 @@ for font in "${FONTS[@]}"; do
     log "installed $font"
 done
 
-EMOJI_SRC="$REPO_DIR/AppleColorEmoji-Linux.ttf"
-if [[ -f "$EMOJI_SRC" ]]; then
-    install -Dm644 "$EMOJI_SRC" "$FONT_DIR/AppleColorEmoji/AppleColorEmoji-Linux.ttf"
-    log "installed Apple Color Emoji"
+EMOJI_DIR="$FONT_DIR/AppleColorEmoji"
+EMOJI_FILE="$EMOJI_DIR/AppleColorEmoji-Linux.ttf"
+EMOJI_URL="https://github.com/samuelngs/apple-emoji-ttf/releases/latest/download/AppleColorEmoji-Linux.ttf"
+
+if [[ -f "$EMOJI_FILE" ]]; then
+    log "Apple Color Emoji already installed, skipping"
 else
-    warn "AppleColorEmoji-Linux.ttf not found next to install.sh — skipping"
+    mkdir -p "$EMOJI_DIR"
+    if run "downloading Apple Color Emoji (~110 MB)" curl -fsSL -o "$EMOJI_FILE" "$EMOJI_URL"; then
+        log "installed Apple Color Emoji"
+    else
+        rm -f "$EMOJI_FILE"
+        warn "failed to download Apple Color Emoji — skipping"
+    fi
 fi
 
 if command -v fc-cache >/dev/null 2>&1; then
@@ -308,7 +316,6 @@ if command -v fc-cache >/dev/null 2>&1; then
         && log "font cache rebuilt" \
         || warn "fc-cache failed, run manually: fc-cache -f"
 fi
-
 # ---------------------------------------------------------------------------
 # 9. permissions on helper scripts (every .sh / .py in the repo's .config)
 # ---------------------------------------------------------------------------
