@@ -19,7 +19,7 @@ This is my personal Hyprland configuration — **light, simple, and constantly i
 
 ---
 
-### 📦 Components
+### 📦Components
 
 | Component | Purpose |
 |-----------|---------|
@@ -33,7 +33,7 @@ This is my personal Hyprland configuration — **light, simple, and constantly i
 | **Fastfetch** | System info fetch |
 | **wallpicker-rs** | Custom wallpaper picker (GTK4 + layer-shell, written in Rust) |
 
-### ✨ Recent additions
+### 👀Recent additions
 
 **Waybar:**
 - Replace the built-in clock with a custom module: hover shows a
@@ -50,7 +50,14 @@ This is my personal Hyprland configuration — **light, simple, and constantly i
 
 ---
 
-### Installation
+### ❗Requirements
+- Fedora Linux (or fedora-based)
+- Wayland session
+- `git`, `base-devel`
+
+---
+
+### 🏁Installation
 
 ```bash
 git clone https://github.com/kirtan-rasa/Hyprland-Dotfiles.git
