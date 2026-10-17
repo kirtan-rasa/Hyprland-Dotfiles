@@ -21,7 +21,7 @@ window#waybar {
     transition-property: background-color;
     transition-duration: 0.4s;
     border-radius: 16px;
-    border: 1px solid rgba(75, 90, 120, 0.3);
+    border: 2px solid rgba(116, 199, 236, 0.5); /* Sapphire */
 }
 
 window#waybar.hidden {
