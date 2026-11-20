@@ -1,9 +1,7 @@
--- Please note not all available settings / options are set here.
 ------------------
 ---- MONITORS ----
 ------------------
 
--- See https://wiki.hypr.land/Configuring/Basics/Monitors/
 hl.monitor({
     output   = "",
     mode     = "preferred",
@@ -16,9 +14,8 @@ hl.monitor({
 --- MY PROGRAMS ----
 ---------------------
 
--- Set programs that you use
 local terminal    = "ghostty"
-local fileManager = "nautilus"
+local fileManager = "nautilus --new-window"
 local menu        = "rofi -show drun -theme ~/.config/rofi/drun.rasi"
 local vpn = "/opt/FlClashX/FlClashX"
 local browser = "flatpak run app.zen_browser.zen"
@@ -27,29 +24,23 @@ local browser = "flatpak run app.zen_browser.zen"
 ---- AUTOSTART ----
 -------------------
 
--- See https://wiki.hypr.land/Configuring/Basics/Autostart/
-
--- Autostart necessary processes (like notifications daemons, status bars, etc.)
--- Or execute your favorite apps at launch like this:
-
 hl.on("hyprland.start", function ()
     hl.exec_cmd("dunst")
-    hl.exec_cmd("/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1")
+    hl.exec_cmd("/usr/libexec/polkit-mate-authentication-agent-1")
     hl.exec_cmd("waybar & hypridle & vicinae server")
     hl.exec_cmd("awww-daemon")
     hl.exec_cmd(browser)
     hl.exec_cmd("flatpak run org.telegram.desktop")
     hl.exec_cmd(vpn)
-    hl.exec_cmd("anytype")
+    hl.exec_cmd("/opt/Anytype/anytype")
     hl.exec_cmd("flatpak run com.spotify.Client")
+    hl.exec_cmd("kdeconnect-app")
 end)
 
 
 -------------------------------
 ---- ENVIRONMENT VARIABLES ----
 -------------------------------
-
--- See https://wiki.hypr.land/Configuring/Advanced-and-Cool/Environment-variables/
 
 hl.env("XCURSOR_SIZE", "24")
 hl.env("HYPRCURSOR_SIZE", "24")
@@ -58,13 +49,12 @@ hl.env("HYPRCURSOR_SIZE", "24")
 ---- LOOK AND FEEL ----
 -----------------------
 
--- Refer to https://wiki.hypr.land/Configuring/Basics/Variables/
 hl.config({
     general = {
         gaps_in  = 5,
         gaps_out = 15,
 
-        border_size = 2,
+        border_size = 3,
 
         col = {
             active_border   = { colors = {"rgba(116, 199, 236, 0.8)", "rgba(30, 30, 46, 1.0)"}, angle = 45 },
@@ -74,7 +64,6 @@ hl.config({
         -- Set to true to enable resizing windows by clicking and dragging on borders and gaps
         resize_on_border = false,
 
-        -- Please see https://wiki.hypr.land/Configuring/Advanced-and-Cool/Tearing/ before you turn this on
         allow_tearing = false,
 
         layout = "dwindle",
@@ -86,7 +75,7 @@ hl.config({
 
         -- Change transparency of focused and unfocused windows
         active_opacity   = 1.0,
-        inactive_opacity = 0.9,
+        inactive_opacity = 1.0,
 
         shadow = {
             enabled      = true,
@@ -97,9 +86,10 @@ hl.config({
 
         blur = {
             enabled   = true,
-            size      = 3,
+            size      = 7,
             passes    = 1,
-            vibrancy  = 0.1696,
+            vibrancy = 0.1696,
+            brightness = 2
         },
     },
 
@@ -108,7 +98,6 @@ hl.config({
     },
 })
 
--- Default curves and animations, see https://wiki.hypr.land/Configuring/Advanced-and-Cool/Animations/
 
 -- Curves
 hl.curve("easeOutQuint",   { type = "bezier", points = { {0.23, 1},    {0.32, 1}    } })
@@ -135,21 +124,18 @@ hl.animation({ leaf = "fade",    enabled = true, speed = 4,   bezier = "quick" }
 hl.animation({ leaf = "layers",     enabled = true, speed = 5, bezier = "spring", style = "slidefade 40%" })
 hl.animation({ leaf = "workspaces", enabled = true, speed = 4, bezier = "default", style = "slidefade 30%" })
 
--- See https://wiki.hypr.land/Configuring/Layouts/Dwindle-Layout/ for more
 hl.config({
     dwindle = {
         preserve_split = true, -- You probably want this
     },
 })
 
--- See https://wiki.hypr.land/Configuring/Layouts/Master-Layout/ for more
 hl.config({
     master = {
         new_status = "master",
     },
 })
 
--- See https://wiki.hypr.land/Configuring/Layouts/Scrolling-Layout/ for more
 hl.config({
     scrolling = {
         fullscreen_on_one_column = true,
@@ -170,7 +156,7 @@ hl.config({
 
         follow_mouse = 1,
 
-        sensitivity = 0, -- -1.0 - 1.0, 0 means no modification.
+        sensitivity = 0,
 
         touchpad = {
             natural_scroll = true,
@@ -190,7 +176,6 @@ hl.gesture({
 
 local mainMod = "SUPER" -- Sets "Windows" key as main modifier
 
--- Example binds, see https://wiki.hypr.land/Configuring/Basics/Binds/ for more
 hl.bind(mainMod .. " + Return", hl.dsp.exec_cmd(terminal))
 hl.bind(mainMod .. " + B", hl.dsp.exec_cmd(browser))
 hl.bind(mainMod .. " + V", hl.dsp.exec_cmd(vpn))
@@ -205,7 +190,6 @@ hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit"))    -- dwindle only
 hl.bind(mainMod .. " + P", hl.dsp.window.pin())
 
 -- Scratchpad: send the focused window to a hidden special workspace,
--- toggle it back into view from anywhere with mainMod + SHIFT + GRAVE.
 -- Handy for anything you want to summon on demand — calculator, eyedropper, etc.
 hl.bind(mainMod .. " + SHIFT + C", hl.dsp.window.move({ workspace = "special:scratch" }))
 hl.bind(mainMod .. " + TAB", hl.dsp.workspace.toggle_special("scratch"))
@@ -233,7 +217,6 @@ hl.bind(mainMod .. " + SHIFT + up",    hl.dsp.window.resize({ x = 0,   y = -20, 
 hl.bind(mainMod .. " + SHIFT + down",  hl.dsp.window.resize({ x = 0,   y = 20,  relative = true }), { repeating = true })
 
 -- Swap windows with mainMod + CTRL + arrow keys (dwindle-specific, via raw dispatch —
--- the Lua API has no direct directional swap yet as of Hyprland 0.55/0.56)
 hl.bind(mainMod .. " + CTRL + left",  hl.dsp.exec_cmd("hyprctl dispatch layoutmsg 'swapwindow l'"))
 hl.bind(mainMod .. " + CTRL + right", hl.dsp.exec_cmd("hyprctl dispatch layoutmsg 'swapwindow r'"))
 hl.bind(mainMod .. " + CTRL + up",    hl.dsp.exec_cmd("hyprctl dispatch layoutmsg 'swapwindow u'"))
@@ -279,11 +262,6 @@ hl.bind("XF86AudioPrev",  hl.dsp.exec_cmd("playerctl previous"),   { locked = tr
 --------------------------------
 ---- WINDOWS AND WORKSPACES ----
 --------------------------------
-
--- See https://wiki.hypr.land/Configuring/Basics/Window-Rules/
--- and https://wiki.hypr.land/Configuring/Basics/Workspace-Rules/
-
--- Example window rules that are useful
 
 hl.window_rule({
     -- Ignore maximize requests from all apps. You'll probably like this.
@@ -390,8 +368,8 @@ hl.window_rule({
 })
 
 hl.window_rule({
-    name  = "ws-happ",
-    match = { class = "Com.follow.clashx" },
+    name  = "ws-FLclashx",
+    match = { class = "com.follow.clashx" },
     workspace = 10,
 })
 
@@ -401,4 +379,15 @@ hl.window_rule({
   float  = true,
   center = true,
   size   = { "monitor_w * 0.5", "monitor_h * 0.6" },
+})
+
+hl.window_rule({
+    match = { class = "^(org.gnome.Nautilus)$" },
+    opacity = "0.9 0.5",
+})
+
+hl.layer_rule({
+    match = { namespace = "waybar" },
+    blur = true,
+    ignore_alpha = 0.1,
 })
