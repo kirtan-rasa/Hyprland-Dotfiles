@@ -150,6 +150,7 @@ PKGS=(
     flameshot
     curl wget unzip fontconfig
     cargo
+    mate-polkit
 )
 
 if (( HAVE_DNF )); then
